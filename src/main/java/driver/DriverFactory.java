@@ -45,16 +45,20 @@ public class DriverFactory {
 
     private static String getBrowserType() {
         String browserType = null;
+        String browserRemoteValue = System.getProperty("browserType");
 
-        try{
-            Properties properties = new Properties();
-            FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/properties/config.properties");
-            properties.load(file);
-            browserType = properties.getProperty("browser").toLowerCase().trim();
-        } catch(IOException exception){
-            System.out.println(exception.getMessage());
+        if(browserRemoteValue == null || browserRemoteValue.isEmpty()){
+            try{
+                Properties properties = new Properties();
+                FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/properties/config.properties");
+                properties.load(file);
+                browserType = properties.getProperty("browser").toLowerCase().trim();
+            } catch(IOException exception){
+                System.out.println(exception.getMessage());
+            }
+            return browserType;
         }
-        return browserType;
+        return browserRemoteValue;
     }
 
     public static void cleanupDriver(){

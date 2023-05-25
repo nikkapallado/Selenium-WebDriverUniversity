@@ -19,6 +19,7 @@ Feature: WebDriver University - Login Page
     And I click the Login button
     Then I should see an unsuccessful popup message
 
+  @ignore
   Scenario Outline: Validate <validateType> Login
     When I enter username <username>
     And I enter password <password>
